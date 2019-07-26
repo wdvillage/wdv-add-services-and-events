@@ -5,6 +5,7 @@ Tags: custom post types, post types
 Requires at least: 4.5.3
 Tested up to: 5.2.2
 Stable tag: trunk
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
