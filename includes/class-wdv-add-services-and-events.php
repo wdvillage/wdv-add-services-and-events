@@ -78,7 +78,7 @@ class Wdv_Add_Services_And_Events {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+                
 	}
 
 	/**
@@ -156,8 +156,14 @@ class Wdv_Add_Services_And_Events {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-                $this->loader->add_action( 'init', $plugin_admin, 'wdv_post_type_services' );
-                $this->loader->add_action( 'init', $plugin_admin, 'wdv_post_type_events' );
+		
+                $this->loader->add_action( 'init', $plugin_admin, 'aniro_wdv_post_type_advertisements' );
+                $this->loader->add_action( 'init', $plugin_admin, 'aniro_wdv_post_type_abouts' );
+                $this->loader->add_action( 'init', $plugin_admin, 'aniro_wdv_post_type_restaurants' );
+                $this->loader->add_action( 'init', $plugin_admin, 'aniro_wdv_post_type_services' );				
+                $this->loader->add_action( 'init', $plugin_admin, 'aniro_wdv_post_type_events' );
+		$this->loader->add_action( 'init', $plugin_admin, 'aniro_wdv_post_type_testimonials' );
+
 	}
 
 	/**

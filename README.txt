@@ -2,8 +2,8 @@
 Contributors: vrpr
 Donate link: http://wdvillage.com
 Tags: custom post types, post types
-Requires at least: 4.5.3
-Tested up to: 5.2.2
+Requires at least: 5.0.0
+Tested up to: 5.8
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv2 or later

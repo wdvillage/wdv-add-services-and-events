@@ -72,7 +72,7 @@ class Wdv_Add_Services_And_Events_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+        wp_enqueue_style( 'fontawesomeadmin', plugin_dir_url( __FILE__ ) . '../includes/fonts/css/all.min.css', array(), '5.11.2', 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wdv-add-services-and-events-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -99,37 +99,36 @@ class Wdv_Add_Services_And_Events_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wdv-add-services-and-events-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
-        /**
-	 * Creates a new custom post type
+     /**
+	 * Creates a new custom post types
 	 *
 	 * @since 	1.0.0
 	 * @access 	public
 	 * @uses 	register_post_type()
 	 */
-        public static function wdv_post_type_services() {
+
+    /**
+	 * Post Type: Restaurants.
+	 */
+        public static function aniro_wdv_post_type_restaurants() {
+		
 	$labels = array(
-		"name" => __( "Services", "anirohotel" ),
-		"singular_name" => __( "Service", "anirohotel" ),
-		"menu_name" => __( "Services", "anirohotel" ),
-		"all_items" => __( "All Services", "anirohotel" ),
-		"add_new" => __( "Add New", "anirohotel" ),
-		"add_new_item" => __( "Add New Service", "anirohotel" ),
-		"edit_item" => __( "Edit Service", "anirohotel" ),
-		"new_item" => __( "New Service", "anirohotel" ),
-		"view_item" => __( "View Service", "anirohotel" ),
-		"view_items" => __( "View Services", "anirohotel" ),
-		"archives" => __( "services", "anirohotel" ),
+		"name" => __( "Restaurants", "aniro-hotel" ),
+		"singular_name" => __( "Restaurant", "aniro-hotel" ),
+		"archives" => __( "restaurants", "aniro-hotel" ),
 	);
 
 	$args = array(
-		"label" => __( "Services", "anirohotel" ),
+		"label" => __( "Restaurants", "aniro-hotel" ),
 		"labels" => $labels,
 		"description" => "",
 		"public" => true,
 		"publicly_queryable" => true,
 		"show_ui" => true,
-		"show_in_rest" => false,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
 		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
 		"has_archive" => true,
 		"show_in_menu" => true,
 		"show_in_nav_menus" => true,
@@ -137,33 +136,38 @@ class Wdv_Add_Services_And_Events_Admin {
 		"capability_type" => "post",
 		"map_meta_cap" => true,
 		"hierarchical" => false,
-		"rewrite" => array( "slug" => "services", "with_front" => true ),
+		"rewrite" => array( "slug" => "restaurants", "with_front" => true ),
 		"query_var" => true,
-		"supports" => array( "title", "editor", "thumbnail", "excerpt", "trackbacks", "custom-fields", "comments", "revisions", "author", "page-attributes", "post-formats" ),
+		"supports" => array( "title", "editor", "thumbnail" ),
 	);
 
-	register_post_type( "services", $args );            
-        }
+	register_post_type( "restaurant", $args );
+            
+	}        
 
-        public static function wdv_post_type_events() {
+        public static function aniro_wdv_post_type_events() {
+
+	/**
+	 * Post Type: Events.
+	 */
+
 	$labels = array(
-		"name" => __( "Events", "anirohotel" ),
-		"singular_name" => __( "Event", "anirohotel" ),
-		"menu_name" => __( "Events", "anirohotel" ),
-		"all_items" => __( "All Events", "anirohotel" ),
-		"add_new" => __( "Add Event", "anirohotel" ),
-		"archives" => __( "events", "anirohotel" ),
+		"name" => __( "Events", "aniro-hotel" ),
+		"singular_name" => __( "Event", "aniro-hotel" ),
+		"archives" => __( "events", "aniro-hotel" ),
 	);
 
 	$args = array(
-		"label" => __( "Events", "anirohotel" ),
+		"label" => __( "Events", "aniro-hotel" ),
 		"labels" => $labels,
 		"description" => "",
 		"public" => true,
 		"publicly_queryable" => true,
 		"show_ui" => true,
-		"show_in_rest" => false,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
 		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
 		"has_archive" => true,
 		"show_in_menu" => true,
 		"show_in_nav_menus" => true,
@@ -173,9 +177,208 @@ class Wdv_Add_Services_And_Events_Admin {
 		"hierarchical" => false,
 		"rewrite" => array( "slug" => "events", "with_front" => true ),
 		"query_var" => true,
-		"supports" => array( "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "post-formats" ),
+		"supports" => array( "title", "editor", "thumbnail" ),
 	);
 
-	register_post_type( "events", $args );            
+	register_post_type( "event", $args );
+
         }
+
+
+     /**
+	 * Post Type: Services.
+	 */
+        public static function aniro_wdv_post_type_services() {
+	$labels = array(
+		"name" => __( "Services", "aniro-hotel" ),
+		"singular_name" => __( "Service", "aniro-hotel" ),
+		"archives" => __( "services", "aniro-hotel" ),
+	);
+
+	$args = array(
+		"label" => __( "Services", "aniro-hotel" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "services", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor" ),
+	);
+
+	register_post_type( "services", $args );
+            
+        } 
+
+
+       /**
+	 * Post Type: Services.
+	 */
+ /*       public static function aniro_wdv_post_type_services() {
+ 
+	$labels = array(
+		"name" => __( "Services", "aniro-hotel" ),
+		"singular_name" => __( "Service", "aniro-hotel" ),
+		"archives" => __( "services", "aniro-hotel" ),
+	);
+
+	$args = array(
+		"label" => __( "Services", "aniro-hotel" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "services", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array("title", "editor"),
+	);
+
+	register_post_type( "service", $args );
+            
+	}*/		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        
+        /**
+	 * Post Type: Testimonials.
+	 */
+        public static function aniro_wdv_post_type_testimonials() {
+	$labels = array(
+		"name" => __( "Testimonials", "aniro-hotel" ),
+		"singular_name" => __( "Testimonial", "aniro-hotel" ),
+		"archives" => __( "testimonials", "aniro-hotel" ),
+	);
+
+	$args = array(
+		"label" => __( "Testimonials", "aniro-hotel" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "testimonials", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor", "thumbnail" ),
+	);
+
+	register_post_type( "testimonial", $args );
+        }
+	/**
+	 * Post Type: Adverticements.
+	 */
+        public static function aniro_wdv_post_type_advertisements() {
+	$labels = array(
+		"name" => __( "Advertisements", "aniro-hotel" ),
+		"singular_name" => __( "Advertisement", "aniro-hotel" ),
+		"archives" => __( "advertisements", "aniro-hotel" ),
+	);
+
+	$args = array(
+		"label" => __( "Advertisements", "aniro-hotel" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "advertisements", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor", "thumbnail" ),
+	);
+
+	register_post_type( "advertisement", $args );
+        }
+
+	/**
+	 * Post Type: Abouts.
+	 */
+        public static function aniro_wdv_post_type_abouts() {
+	$labels = array(
+		"name" => __( "Abouts", "aniro-hotel" ),
+		"singular_name" => __( "About", "aniro-hotel" ),
+		"archives" => __( "abouts", "aniro-hotel" ),
+	);
+
+	$args = array(
+		"label" => __( "Abouts", "aniro-hotel" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "abouts", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor", "thumbnail" ),
+	);
+
+	register_post_type( "about", $args );
+        }    
 }

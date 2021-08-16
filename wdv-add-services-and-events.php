@@ -10,7 +10,7 @@
  * Plugin Name:       WDV - Add Services and Events
  * Plugin URI:        http://wdvillage.com/product/wdv-add-services-and-events-plugin/
  * Description:       The plugin "WDV - Add Services and Events" added custom post types "Services" and "Events" to WP theme "Aniro Hotel".
- * Version:           1.0.0
+ * Version:           1.0.6
  * Author:            wdvillage
  * Author URI:        http://wdvillage.com
  * License:           GPL-2.0+
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WDV_ADD_SERVICES_AND_EVENTS_VERSION', '1.0.0' );
+define( 'WDV_ADD_SERVICES_AND_EVENTS_VERSION', '1.0.6' );
 
 /**
  * The code that runs during plugin activation.
